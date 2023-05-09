@@ -1,12 +1,13 @@
+import random
 class Client:
 	def __init__(self, name):
 		self.name = name
-		self.Connection_serveur_client = True
-		self.virement = True
-		self.depot_cheque= True
-		self.rdv_planing = True
-		self.appel_tel = True
-		self.emprunt=True
+		self.Connection_serveur_client = False
+		self.virement = False
+		self.depot_cheque= False
+		self.rdv_planing = False
+		self.appel_tel = False
+		self.emprunt=False
 		self.Connection_serveur_admin=False
 		self.Financial_planning=False
 		self.Approuve_Pret=False
@@ -19,13 +20,13 @@ class Employee:
 		self.virement = False
 		self.depot_cheque= False
 		self.rdv_planing = False
-		self.appel_tel = True
+		self.appel_tel = False
 		self.emprunt=False
 		self.Connection_serveur_admin=False
-		self.Financial_planning=True
-		self.Approuve_Pret=True
+		self.Financial_planning=False
+		self.Approuve_Pret=False
 		self.Connection_serveur_employee=False
-		self.Commit_cheque=True
+		self.Commit_cheque=False
 class Admin:
 	def __init__(self, name):
 	    	self.name=name
@@ -33,9 +34,9 @@ class Admin:
 	    	self.virement = False
 	    	self.depot_cheque= False
 	    	self.rdv_planing = False
-	    	self.appel_tel = True
+	    	self.appel_tel = False
 	    	self.emprunt=False
-	    	self.Connection_serveur_admin=True
+	    	self.Connection_serveur_admin=False
 	    	self.Financial_planning=False
 	    	self.Approuve_Pret=False
 	    	self.Connection_serveur_employee=False
@@ -56,33 +57,12 @@ char3.Commit_cheque=False
 char5.Financial_planning=False
 
 
-
-#Logic Condition
-## EX IF rdv_planning=True donc Financial_planning = True
-#Set ZERO
-for i in vars(Admin):
-	setattr(Admin,i,False)
-for i in vars(Employee):
-	setattr(Employee,i,False)
-for i in vars(Client):
-	setattr(Client,i,False)
-print(char1.virement)
-
-
-
-
-
 if __name__ == '__main__':
-	While True:
+	while True:
 		#IF admin don't connect everyone can't do a thing
+		char4.Connection_serveur_admin=random.choice([True,False])
 		if(char4.Connection_serveur_admin !=True):
-		    for i in vars(Admin):
-		   	 setattr(Admin,i,False)
-		    for i in vars(Employee):
-		   	 setattr(Employee,i,False)
-		    for i in vars(Client):
-		   	 setattr(Client,i,False)	
-
+			print("Server isn't online \n")
 		else: #char4.Connection_serveur_admin =True
 			print("Server start by Admin All operation is permitted\n")
 			char1.Connection_serveur_client=random.choice([True,False])
@@ -95,4 +75,8 @@ if __name__ == '__main__':
 				pass
 			else: #char1.virement=True
 				print("Client demanded vivement\n")
-			
+				char5.Approuve_Pret=random.choice([True,False])
+				if(char5.Approuve_Pret!=True):
+					pass
+				else:#char5.Approuve_Pret=True
+					print("Director appouve the cheque \n")
