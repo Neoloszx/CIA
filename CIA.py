@@ -5,7 +5,6 @@ class Client:
 		self.Connection_serveur_client = False
 		self.virement = False
 		self.depot_cheque= False
-		self.rdv_planing = False
 		self.appel_tel = False
 		self.emprunt=False
 		self.Connection_serveur_admin=False
@@ -43,40 +42,48 @@ class Admin:
 	    	self.Commit_cheque=False
 # Create Character
 char1 = Client("Client1")
-char2 = Employee("Conseillers_financiers")
-char3 = Employee("Secrétaires")
 char4 = Admin("IT Support")
 char5 = Employee("Directeur")
 
-# Set the bool_var variable for each character
-char2.Approuve_Pret=False
-char2.Commit_cheque=False
-char3.Financial_planning=False
-char3.Approuve_Pret=False
-char3.Commit_cheque=False
-char5.Financial_planning=False
+quit=0
+listx=[0,0,0,0,0,0,0,0] 
+#admin_connect,server_status,client_connect,demand_vivement,depot_cheque,employee_connect,vivement_approuved,cheque_approuved
 
 
 if __name__ == '__main__':
-	while True:
+	while (quit==0):
 		#IF admin don't connect everyone can't do a thing
 		char4.Connection_serveur_admin=random.choice([True,False])
 		if(char4.Connection_serveur_admin !=True):
 			print("Server isn't online \n")
+			quit=1
+			print(listx)
 		else: #char4.Connection_serveur_admin =True
+			listx[0]=1
 			print("Server start by Admin All operation is permitted\n")
 			char1.Connection_serveur_client=random.choice([True,False])
 			if(char1.Connection_serveur_client !=True):
 				pass
 			else:#char1.Connection_serveur_client=True
+				listx[2]=1
 				print("Client is connected\n")
-			char1.virement=random.choice([True,False])
-			if(char1.virement !=True):
-				pass
-			else: #char1.virement=True
-				print("Client demanded vivement\n")
-				char5.Approuve_Pret=random.choice([True,False])
-				if(char5.Approuve_Pret!=True):
+				char1.depot_cheque=random.choice([True,False])
+				if(char1.depot_cheque !=True):
 					pass
-				else:#char5.Approuve_Pret=True
-					print("Director appouve the cheque \n")
+				else: #char1.depot_cheque=True
+					listx[4]=1
+					print("Client demanded depot_cheque\n")
+					char5.Commit_cheque=random.choice([True,False])
+					if(char5.Commit_cheque!=True):
+						listx[7]=0
+						print("Director rejected the cheque \n")
+					else:#char5.Approuve_Pret=True
+						listx[7]=1
+						print("Director appouve the cheque \n")
+				char1.rdv_planing=random.choice([True,False])
+				if(char1.rdv_planing !=True):
+					pass
+				else:#char1.rdv_planing=True
+					char2.Financial_planning=True
+					print("Conseillers_financiers a donné un conseil financier\n")
+					
