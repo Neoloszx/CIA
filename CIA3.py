@@ -27,19 +27,20 @@ class Employee:
 		self.Connection_serveur_employee=False
 		self.Commit_cheque=False
 class Admin:
-	def __init__(self, name):
-	    	self.name=name
-	    	self.Connection_serveur_client = False
-	    	self.virement = False
-	    	self.depot_cheque= False
-	    	self.rdv_planing = False
-	    	self.appel_tel = False
-	    	self.emprunt=False
-	    	self.Connection_serveur_admin=False
-	    	self.vivement_Approuve=False
-	    	self.Approuve_Pret=False
-	    	self.Connection_serveur_employee=False
-	    	self.Commit_cheque=False
+    def __init__(self, name):
+        self.name=name
+        self.Connection_serveur_client = False
+        self.virement = False
+        self.depot_cheque= False
+        self.rdv_planing = False
+        self.appel_tel = False
+        self.emprunt=False
+        self.Connection_serveur_admin=False
+        self.vivement_Approuve=False
+        self.Approuve_Pret=False
+        self.Connection_serveur_employee=False
+        self.Commit_cheque=False
+        self.server_start=False
 # Create Character
 char1 = Client("Client1")
 char4 = Admin("IT Support")
@@ -50,14 +51,24 @@ char5 = Employee("Directeur")
 
 def Eventgen():
     listx=[0,0,0,0,0,0,0,0]
-    char4.Connection_serveur_admin=True
+    char4.Connection_serveur_admin=random.choice([True,False])
     if(char4.Connection_serveur_admin !=True):
-        print("Server isn't online \n")
+        print("Admin isn't here \n")
         print(listx)
+        return listx
     else: #char4.Connection_serveur_admin =True
         listx[0]=1
-        print("Server start by Admin All operation is permitted\n")
+        print("Admin come to work!")
+        #
         print(listx)
+        char4.server_start=random.choice([True,False])
+        if(char4.server_start!=True):
+            print("Admin didn't start server")
+            print(listx)
+        else:
+            listx[1]=1
+            print("Server start by Admin All operation is permitted\n")
+            print(listx)
         char1.Connection_serveur_client=random.choice([True,False])
         if(char1.Connection_serveur_client !=True):
             print("Client isn't connected\n")
