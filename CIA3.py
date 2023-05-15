@@ -1,4 +1,5 @@
 import random
+import itertools
 class Client:
 	def __init__(self, name):
 		self.name = name
@@ -115,10 +116,54 @@ def Eventgen():
                             print("Director appouve the cheque \n")
                             print(listx)
                             return listx
-                            
+def generate_possibilities():
+    possibilities = []
+    for admin_connect in [False, True]:
+        for server_status in [False, True]:
+            for client_connect in [False, True]:
+                for demand_virement in [False, True]:
+                    for depot_cheque in [False, True]:
+                        for employee_connect in [False, True]:
+                            for vivement_approuve in [False, True]:
+                                for cheque_approuve in [False, True]:
+                                    # Apply conditions and exclude invalid possibilities
+                                    if (admin_connect and server_status) or (not admin_connect):
+                                        if client_connect:
+                                            if depot_cheque:
+                                                if cheque_approuve:
+                                                    if demand_virement:
+                                                        if vivement_approuve:
+                                                            possibilities.append([
+                                                                admin_connect,
+                                                                server_status,
+                                                                client_connect,
+                                                                demand_virement,
+                                                                depot_cheque,
+                                                                employee_connect,
+                                                                vivement_approuve,
+                                                                cheque_approuve
+                                                            ])
+                                        else:
+                                            possibilities.append([
+                                                admin_connect,
+                                                server_status,
+                                                client_connect,
+                                                demand_virement,
+                                                depot_cheque,
+                                                employee_connect,
+                                                vivement_approuve,
+                                                cheque_approuve
+                                            ])
+    
+    return possibilities                         
 if __name__ == '__main__':
     print("[admin_connect,server_status,client_connect,demand_vivement,depot_cheque,employee_connect,vivement_approuved,cheque_approuved]")
     Eventgen()
+    possibilities = generate_possibilities()
+    
+    total_possibilities = len(possibilities)
+    print("Total number of possibilities:", total_possibilities)
+
     #print("How many event you want to generate ?")
     #inum=int(input())
     #listforshow=[]
