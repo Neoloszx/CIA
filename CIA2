@@ -53,7 +53,9 @@ listx=[0,0,0,0,0,0,0,0]
 if __name__ == '__main__':
 	while (quit==0):
 		#IF admin don't connect everyone can't do a thing
-		char4.Connection_serveur_admin=random.choice([True,False])
+		#char4.Connection_serveur_admin=random.choice([True,False])
+		#ล็อคผลให้Admin เปิดserverตลอด
+		char4.Connection_serveur_admin=True
 		if(char4.Connection_serveur_admin !=True):
 			print("Server isn't online \n")
 			quit=1
@@ -61,34 +63,46 @@ if __name__ == '__main__':
 		else: #char4.Connection_serveur_admin =True
 			listx[0]=1
 			print("Server start by Admin All operation is permitted\n")
+			print(listx)
 			char1.Connection_serveur_client=random.choice([True,False])
 			if(char1.Connection_serveur_client !=True):
-				pass
+				print(listx)
+				quit=1
 			else:#char1.Connection_serveur_client=True
 				listx[2]=1
 				print("Client is connected\n")
+				print(listx)
 				char1.depot_cheque=random.choice([True,False])
 				if(char1.depot_cheque !=True):
 					pass
 				else: #char1.depot_cheque=True
 					listx[4]=1
 					print("Client demanded depot_cheque\n")
+					print(listx)
 					char5.Commit_cheque=random.choice([True,False])
 					if(char5.Commit_cheque!=True):
 						listx[7]=0
 						print("Director rejected the cheque \n")
+						print(listx)
 					else:#char5.Approuve_Pret=True
 						listx[7]=1
 						print("Director appouve the cheque \n")
+						print(listx)
 				char1.virement=random.choice([True,False])
 				if(char1.virement !=True):
 					pass
 				else:#char1.virement=True
 					listx[3]=1
+					print("Client demanded for virement")
+					print(listx)
 					char2.vivement_Approuve=random.choice([True,False])
 					if(char5.vivement_Approuve!=True):
 						listx[6]=0
 						print("Director rejected the vivement\n")
+						print(listx)
+                        quit=1
 					else:#char5.vivement_Approuve=True
 						listx[6]=1
 						print("Director appouve the cheque \n")
+						print(listx)
+                        quit=1
