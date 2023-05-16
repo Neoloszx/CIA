@@ -1,3 +1,5 @@
+import datetime
+
 class Action:
     def __init__(self, name, preconditions, postconditions, machine=None, agent_type=None):
         self.name = name
@@ -26,22 +28,20 @@ actions = [
     Action("Modifier les préférences de compte", [], ["Préférences de compte modifiées"], "PC personnel", "Client de la banque")
 ]
 
-
-
 # Fonction pour vérifier si les préconditions d'une action sont remplies
 def verif_preconditions(action, etat):
-    return all(condition in etat for condition in action.preconditions)
+    return all(etat[actions.index(condition)] for condition in action.preconditions)
 
 # Fonction pour appliquer les postconditions d'une action à l'état
 def appliquer_postconditions(action, etat):
-    return etat + action.postconditions
+    return etat + [True] * len(action.postconditions)
 
 # Planificateur en extension
 def planificateur_extension(etat_initial, but):
     plan = []
     etat = etat_initial
 
-    while but not in etat:
+    while not etat[but]:
         action_possible = None
 
         for action in actions:
@@ -58,55 +58,24 @@ def planificateur_extension(etat_initial, but):
     return plan
 
 # Exemple d'utilisation
-etat_initial = []
-but = "But atteint"
+etat_initial = [False] * len(actions)
+etat_initial[0] = True # Condition initiale pour "Observer le trafic réseau"
+but = 4 # But : "But atteint"
 
 plan = planificateur_extension(etat_initial, but)
 
 if plan is not None:
-    for action in plan:
-        print(action.name)
+    with open("rapport_activites.txt", "w") as fichier:
+        for action in plan:
+            heure = datetime.datetime.now().strftime("%H:%M:%S")
+            etat = " - ".join(str(int(cond)) for cond in etat_initial)
+            fichier.write(f"{heure} - {etat}\n")
+            fichier.write(f"{heure} - {action.name}\n")
+            etat_initial = appliquer_postconditions(action, etat_initial)
+            heure = datetime.datetime.now().strftime("%H:%M:%S")
+            etat = " - ".join(str(int(cond)) for cond in etat_initial)
+            fichier.write(f"{heure} - {etat}\n")
+            fichier.write(f"{heure} - But atteint\n")
 else:
     print("Aucun plan trouvé pour atteindre le but.")
 
-
-# Fonction pour vérifier si les préconditions d'une action sont remplies
-def verif_preconditions(action, etat):
-    return all(condition in etat for condition in action.preconditions)
-
-# Fonction pour appliquer les postconditions d'une action à l'état
-def appliquer_postconditions(action, etat):
-    return etat + action.postconditions
-
-# Planificateur en extension
-def planificateur_extension(etat_initial, but):
-    plan = []
-    etat = etat_initial
-
-    while but not in etat:
-        action_possible = None
-
-        for action in actions:
-            if verif_preconditions(action, etat):
-                action_possible = action
-                break
-
-        if action_possible is None:
-            return None  # Aucun plan trouvé pour atteindre le but
-
-        plan.append(action_possible)
-        etat = appliquer_postconditions(action_possible, etat)
-
-    return plan
-
-# Exemple d'utilisation
-etat_initial = []
-but = "But atteint"
-
-plan = planificateur_extension(etat_initial, but)
-
-if plan is not None:
-    for action in plan:
-        print(action.name)
-else:
-    print("Aucun plan trouvé pour atteindre le but.")
