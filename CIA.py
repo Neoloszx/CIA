@@ -83,7 +83,7 @@ def Eventgen():
             print(listx)
             char1.depot_cheque=random.choice([True,False])
             if(char1.depot_cheque !=True):
-                return listx
+                pass
                 #pass
             else: #char1.depot_cheque=True
                 listx[4]=1
@@ -100,24 +100,24 @@ def Eventgen():
                     print(listx)
             #Line 102 et 84
             char1.virement=random.choice([True,False])
-                    if(char1.virement !=True):
-                        return listx
-                        #pass
-                    else:#char1.virement=True
-                        listx[3]=1
-                        print("Client demanded for virement")
-                        print(listx)
-                        char5.vivement_Approuve=random.choice([True,False])
-                        if(char5.vivement_Approuve!=True):
-                            listx[5]=0
-                            print("Director rejected the vivement\n")
-                            print(listx)
-                            return listx
-                        else:#char5.vivement_Approuve=True
-                            listx[5]=1
-                            print("Director appouve the cheque \n")
-                            print(listx)
-                            return listx
+            if(char1.virement !=True):
+                return listx
+                #pass
+            else:#char1.virement=True
+                listx[3]=1
+                print("Client demanded for virement")
+                print(listx)
+                char5.vivement_Approuve=random.choice([True,False])
+                if(char5.vivement_Approuve!=True):
+                    listx[5]=0
+                    print("Director rejected the vivement\n")
+                    print(listx)
+                    return listx
+                else:#char5.vivement_Approuve=True
+                    listx[5]=1
+                    print("Director appouve the cheque \n")
+                    print(listx)
+                    return listx
 def generate_possibilities():
     possibilities = []
     for admin_connect in [False, True]:
