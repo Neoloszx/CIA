@@ -146,7 +146,7 @@ def generate_possibilities():
 
                          
 if __name__ == '__main__':
-    print("[admin_connect,server_status,client_connect,demand_vivement,depot_cheque,employee_connect,vivement_approuved,cheque_approuved]")
+    print("[admin_connect,server_status,client_connect,demand_vivement,depot_cheque,vivement_approuved,cheque_approuved]")
     Eventgen()
     possibilities = generate_possibilities()
     possibilities_count = len(generate_possibilities())
