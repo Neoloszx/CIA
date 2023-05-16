@@ -120,39 +120,39 @@ def generate_possibilities():
     possibilities = []
     for admin_connect in [False, True]:
         for server_status in [False, True]:
-            for client_connect in [False, True]:
-                for demand_virement in [False, True]:
-                    for depot_cheque in [False, True]:
-                        for employee_connect in [False, True]:
-                            for vivement_approuve in [False, True]:
-                                for cheque_approuve in [False, True]:
-                                    # Apply conditions and exclude invalid possibilities
-                                    if (not admin_connect) or (admin_connect and server_status):
-                                        if (not client_connect) or (client_connect and depot_cheque and cheque_approuve and demand_virement and vivement_approuve):
-                                            possibilities.append([
-                                                admin_connect,
-                                                server_status,
-                                                client_connect,
-                                                demand_virement,
-                                                depot_cheque,
-                                                employee_connect,
-                                                vivement_approuve,
-                                                cheque_approuve
-                                            ])
-    possibilities_count = len(generate_possibilities())
-    print("Posibility Count:", possibilities_count)
+            if (not admin_connect) or (admin_connect and not server_status):
+                for client_connect in [False, True]:
+                    if (not client_connect) or (client_connect and not depot_cheque and not cheque_approuve and not demand_virement and not vivement_approuve):
+                        for demand_virement in [False, True]:
+                            if (not demand_virement) or (demand_virement and not depot_cheque):
+                                for depot_cheque in [False, True]:
+                                    if (not depot_cheque) or (depot_cheque and not cheque_approuve):
+                                        for employee_connect in [False, True]:
+                                            for vivement_approuve in [False, True]:
+                                                if (not vivement_approuve) or (vivement_approuve and not demand_virement):
+                                                    for cheque_approuve in [False, True]:
+                                                        possibilities.append([
+                                                            admin_connect,
+                                                            server_status,
+                                                            client_connect,
+                                                            demand_virement,
+                                                            depot_cheque,
+                                                            employee_connect,
+                                                            vivement_approuve,
+                                                            cheque_approuve
+                                                        ])
+
     return possibilities
+
                          
 if __name__ == '__main__':
     print("[admin_connect,server_status,client_connect,demand_vivement,depot_cheque,employee_connect,vivement_approuved,cheque_approuved]")
     Eventgen()
     possibilities = generate_possibilities()
-    
-    total_possibilities = len(possibilities)
-    print("Total number of possibilities:", total_possibilities)
+    possibilities_count = len(generate_possibilities())
     for possibility in possibilities:
         print(possibility)
-
+    print("Possibility_count : ",possibilities_count)
     #print("How many event you want to generate ?")
     #inum=int(input())
     #listforshow=[]
