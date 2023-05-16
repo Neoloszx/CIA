@@ -34,13 +34,12 @@ def verif_preconditions(action, etat):
 
 # Fonction pour appliquer les postconditions d'une action à l'état
 def appliquer_postconditions(action, etat):
-    return etat + [True] * len(action.postconditions)
+    return [etat[i] or (i in action.postconditions) for i in range(len(etat))]
 
 # Planificateur en extension
 def planificateur_extension(etat_initial, but):
     plan = []
     etat = etat_initial
-
     while not etat[but]:
         action_possible = None
 
@@ -66,16 +65,19 @@ plan = planificateur_extension(etat_initial, but)
 
 if plan is not None:
     with open("rapport_activites.txt", "w") as fichier:
+        heure = datetime.datetime.now().strftime("%H:%M:%S")
+        etat = " - ".join(str(int(cond)) for cond in etat_initial)
+        fichier.write(f"{heure} - {etat}\n")
         for action in plan:
             heure = datetime.datetime.now().strftime("%H:%M:%S")
-            etat = " - ".join(str(int(cond)) for cond in etat_initial)
-            fichier.write(f"{heure} - {etat}\n")
             fichier.write(f"{heure} - {action.name}\n")
             etat_initial = appliquer_postconditions(action, etat_initial)
             heure = datetime.datetime.now().strftime("%H:%M:%S")
             etat = " - ".join(str(int(cond)) for cond in etat_initial)
             fichier.write(f"{heure} - {etat}\n")
-            fichier.write(f"{heure} - But atteint\n")
+
+        heure = datetime.datetime.now().strftime("%H:%M:%S")
+        fichier.write(f"{heure} - But atteint\n")
+
 else:
     print("Aucun plan trouvé pour atteindre le but.")
-
