@@ -48,10 +48,10 @@ char4 = Admin("IT Support")
 char5 = Employee("Directeur")
 
  
-#admin_connect,server_status,client_connect,demand_vivement,depot_cheque,vivement_approuved,cheque_approuved
+#admin_connect,server_status,client_connect,demand_vivement,depot_cheque,employee_connect,vivement_approuved,cheque_approuved
 
 def Eventgen():
-    listx=[0,0,0,0,0,0,0]
+    listx=[0,0,0,0,0,0,0,0]
     char4.Connection_serveur_admin=random.choice([True,False])
     if(char4.Connection_serveur_admin !=True):
         print("Admin isn't here \n")
