@@ -89,12 +89,12 @@ def Eventgen():
                 print(listx)
                 char5.Commit_cheque=random.choice([True,False])
                 if(char5.Commit_cheque!=True):
-                    listx[7]=0
+                    listx[6]=0
                     print("Director rejected the cheque \n")
                     print(listx)
                     return listx
                 else:#char5.Approuve_Pret=True
-                    listx[7]=1
+                    listx[6]=1
                     print("Director appouve the cheque \n")
                     print(listx)
                     char1.virement=random.choice([True,False])
@@ -107,12 +107,12 @@ def Eventgen():
                         print(listx)
                         char5.vivement_Approuve=random.choice([True,False])
                         if(char5.vivement_Approuve!=True):
-                            listx[6]=0
+                            listx[5]=0
                             print("Director rejected the vivement\n")
                             print(listx)
                             return listx
                         else:#char5.vivement_Approuve=True
-                            listx[6]=1
+                            listx[5]=1
                             print("Director appouve the cheque \n")
                             print(listx)
                             return listx
