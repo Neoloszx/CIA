@@ -94,12 +94,12 @@ def Eventgen():
                     listx[6]=0
                     print("Director rejected the cheque \n")
                     print(listx)
-                    return listx
                 else:#char5.Approuve_Pret=True
                     listx[6]=1
                     print("Director appouve the cheque \n")
                     print(listx)
-                    char1.virement=random.choice([True,False])
+            #Line 102 et 84
+            char1.virement=random.choice([True,False])
                     if(char1.virement !=True):
                         return listx
                         #pass
