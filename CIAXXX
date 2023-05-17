@@ -63,12 +63,29 @@ def Eventgen():
         print("Time:", random_time)
         print("Admin isn't here")
         print("List:", listx)
+        
+        #Transform time to str :)
+        time_string=random_time.strftime("%d-%m-%Y %H:%M:%S")
+        #Create log string
+        log_tuple=time_string,"Admin isn't here",listx
+        log_string=f"{log_tuple[0]},{log_tuple[1]},{log_tuple[2]}"
+        #Send to log
+        f = open('logfile.txt','a')
+        f.write('\n' + log_string)
+        f.close()
         return listx
     else:
         listx[0] = 1
         print("Time:", random_time)
         print("Admin comes to work!")
         print("List:", listx)
+        
+time_string=random_time.strftime("%d-%m-%Y %H:%M:%S")
+log_string=f"{log_tuple[0]},{log_tuple[1]},{log_tuple[2]}"
+f = open('logfile.txt','a')
+f.write('\n' + log_string)
+f.close()
+        log_tuple=random_time,"Admin comes to work!",listx
 
         char4.server_start = random.choice([True, False])
         if not char4.server_start:
@@ -76,6 +93,10 @@ def Eventgen():
             print("Time:", random_time)
             print("Admin didn't start the server")
             print("List:", listx)
+            #Create log string
+            log_tuple=random_time,"Admin didn't start the server",listx
+            
+      
             return listx
         else:
             listx[1] = 1
@@ -83,6 +104,7 @@ def Eventgen():
             print("Time:", random_time)
             print("Server started by Admin. All operations are permitted")
             print("List:", listx)
+            log_tuple=random_time,"Server started by Admin. All operations are permitted",listx
 
         char1.Connection_serveur_client = random.choice([True, False])
         if not char1.Connection_serveur_client:
@@ -90,6 +112,7 @@ def Eventgen():
             print("Time:", random_time)
             print("Client isn't connected")
             print("List:", listx)
+            log_tuple=random_time,"Client isn't connected",listx
             return listx
         else:
             listx[2] = 1
@@ -97,6 +120,7 @@ def Eventgen():
             print("Time:", random_time)
             print("Client is connected")
             print("List:", listx)
+            log_tuple=random_time,"Client is connected",listx
 
             char1.depot_cheque = random.choice([True, False])
             if char1.depot_cheque:
@@ -105,6 +129,7 @@ def Eventgen():
                 print("Time:", random_time)
                 print("Client demanded deposit_cheque")
                 print("List:", listx)
+                log_tuple=random_time,"Client demanded deposit_cheque",listx
 
                 char5.Commit_cheque = random.choice([True, False])
                 if not char5.Commit_cheque:
@@ -113,12 +138,14 @@ def Eventgen():
                     print("Time:", random_time)
                     print("Director rejected the cheque")
                     print("List:", listx)
+                    log_tuple=random_time,"Director rejected the cheque",listx
                 else:
                     listx[6] = 1
                     random_time += datetime.timedelta(seconds=random.randint(1, 999999))
                     print("Time:", random_time)
                     print("Director approved the cheque")
                     print("List:", listx)
+                    log_tuple=random_time,"Director approved the cheque",listx
 
             char1.virement = random.choice([True, False])
             if char1.virement:
@@ -127,6 +154,7 @@ def Eventgen():
                 print("Time:", random_time)
                 print("Client demanded virement")
                 print("List:", listx)
+                log_tuple=random_time,"Client demanded virement",listx
 
                 char5.vivement_Approuve = random.choice([True, False])
                 if not char5.vivement_Approuve:
@@ -135,6 +163,7 @@ def Eventgen():
                     print("Time:", random_time)
                     print("Director rejected the vivement")
                     print("List:", listx)
+                    log_tuple=random_time,"Director rejected the vivement",listx
                     return listx
                 else:
                     listx[5] = 1
@@ -142,6 +171,7 @@ def Eventgen():
                     print("Time:", random_time)
                     print("Director approved the vivement")
                     print("List:", listx)
+                    log_tuple=random_time,"Director approved the vivement",listx
                     return listx
 
 if __name__ == '__main__':
