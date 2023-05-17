@@ -60,38 +60,42 @@ def Eventgen():
     
     char4.Connection_serveur_admin = random.choice([True, False])
     if not char4.Connection_serveur_admin:
+        print("Time:", random_time)
         print("Admin isn't here")
         print("List:", listx)
         return listx
     else:
         listx[0] = 1
-        random_time += datetime.timedelta(seconds=random.randint(1, 10))
         print("Time:", random_time)
         print("Admin comes to work!")
         print("List:", listx)
 
         char4.server_start = random.choice([True, False])
         if not char4.server_start:
-            print("\nAdmin didn't start the server")
+            random_time += datetime.timedelta(seconds=random.randint(1, 10))
+            print("Time:", random_time)
+            print("Admin didn't start the server")
             print("List:", listx)
             return listx
         else:
             listx[1] = 1
             random_time += datetime.timedelta(seconds=random.randint(1, 10))
             print("Time:", random_time)
-            print("\nServer started by Admin. All operations are permitted")
+            print("Server started by Admin. All operations are permitted")
             print("List:", listx)
 
         char1.Connection_serveur_client = random.choice([True, False])
         if not char1.Connection_serveur_client:
-            print("\nClient isn't connected")
+            random_time += datetime.timedelta(seconds=random.randint(1, 10))
+            print("Time:", random_time)
+            print("Client isn't connected")
             print("List:", listx)
             return listx
         else:
             listx[2] = 1
             random_time += datetime.timedelta(seconds=random.randint(1, 10))
             print("Time:", random_time)
-            print("\nClient is connected")
+            print("Client is connected")
             print("List:", listx)
 
             char1.depot_cheque = random.choice([True, False])
@@ -99,7 +103,7 @@ def Eventgen():
                 listx[4] = 1
                 random_time += datetime.timedelta(seconds=random.randint(1, 10))
                 print("Time:", random_time)
-                print("\nClient demanded deposit_cheque")
+                print("Client demanded deposit_cheque")
                 print("List:", listx)
 
                 char5.Commit_cheque = random.choice([True, False])
@@ -107,13 +111,13 @@ def Eventgen():
                     listx[6] = 0
                     random_time += datetime.timedelta(seconds=random.randint(1, 10))
                     print("Time:", random_time)
-                    print("\nDirector rejected the cheque")
+                    print("Director rejected the cheque")
                     print("List:", listx)
                 else:
                     listx[6] = 1
                     random_time += datetime.timedelta(seconds=random.randint(1, 10))
                     print("Time:", random_time)
-                    print("\nDirector approved the cheque")
+                    print("Director approved the cheque")
                     print("List:", listx)
 
             char1.virement = random.choice([True, False])
@@ -121,7 +125,7 @@ def Eventgen():
                 listx[3] = 1
                 random_time += datetime.timedelta(seconds=random.randint(1, 10))
                 print("Time:", random_time)
-                print("\nClient demanded virement")
+                print("Client demanded virement")
                 print("List:", listx)
 
                 char5.vivement_Approuve = random.choice([True, False])
@@ -129,14 +133,14 @@ def Eventgen():
                     listx[5] = 0
                     random_time += datetime.timedelta(seconds=random.randint(1, 10))
                     print("Time:", random_time)
-                    print("\nDirector rejected the vivement")
+                    print("Director rejected the vivement")
                     print("List:", listx)
                     return listx
                 else:
                     listx[5] = 1
                     random_time += datetime.timedelta(seconds=random.randint(1, 10))
                     print("Time:", random_time)
-                    print("\nDirector approved the vivement")
+                    print("Director approved the vivement")
                     print("List:", listx)
                     return listx
 
