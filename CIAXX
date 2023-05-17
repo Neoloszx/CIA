@@ -140,12 +140,12 @@ def generate_possibilities():
                                                                 client_connect,
                                                                 demand_virement,
                                                                 depot_cheque,
-                                                                employee_connect,
                                                                 vivement_approuve,
                                                                 cheque_approuve
                                                             ])
 
     return possibilities
+
 
 
 
@@ -162,7 +162,8 @@ if __name__ == '__main__':
     Eventgen()
     possibilities = generate_possibilities()
     num_results = len(possibilities)
-
+    for result in possibilities:
+        print(result)
     print("Number of different types of results:", num_results)
 
         
