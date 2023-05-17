@@ -54,7 +54,7 @@ def Eventgen():
     listx=[0,0,0,0,0,0,0]
     char4.Connection_serveur_admin=random.choice([True,False])
     if(char4.Connection_serveur_admin !=True):
-        print("Admin isn't here \n")
+        print("Admin isn't here")
         print(listx)
         return listx
     else: #char4.Connection_serveur_admin =True
@@ -64,22 +64,22 @@ def Eventgen():
         print(listx)
         char4.server_start=random.choice([True,False])
         if(char4.server_start!=True):
-            print("Admin didn't start server")
+            print("\nAdmin didn't start server")
             print(listx)
             return listx
             
         else:
             listx[1]=1
-            print("Server start by Admin All operation is permitted\n")
+            print("\nServer start by Admin All operation is permitted")
             print(listx)
         char1.Connection_serveur_client=random.choice([True,False])
         if(char1.Connection_serveur_client !=True):
-            print("Client isn't connected\n")
+            print("\nClient isn't connected")
             print(listx)
             return listx
         else:#char1.Connection_serveur_client=True
             listx[2]=1
-            print("Client is connected\n")
+            print("\nClient is connected")
             print(listx)
             char1.depot_cheque=random.choice([True,False])
             if(char1.depot_cheque !=True):
@@ -87,16 +87,16 @@ def Eventgen():
                 #pass
             else: #char1.depot_cheque=True
                 listx[4]=1
-                print("Client demanded depot_cheque\n")
+                print("\nClient demanded depot_cheque")
                 print(listx)
                 char5.Commit_cheque=random.choice([True,False])
                 if(char5.Commit_cheque!=True):
                     listx[6]=0
-                    print("Director rejected the cheque \n")
+                    print("\nDirector rejected the cheque")
                     print(listx)
                 else:#char5.Approuve_Pret=True
                     listx[6]=1
-                    print("Director appouve the cheque \n")
+                    print("\nDirector appouve the cheque")
                     print(listx)
             #Line 102 et 84
             char1.virement=random.choice([True,False])
@@ -105,17 +105,17 @@ def Eventgen():
                 #pass
             else:#char1.virement=True
                 listx[3]=1
-                print("Client demanded for virement")
+                print("\nClient demanded for virement")
                 print(listx)
                 char5.vivement_Approuve=random.choice([True,False])
                 if(char5.vivement_Approuve!=True):
                     listx[5]=0
-                    print("Director rejected the vivement\n")
+                    print("\nDirector rejected the vivement")
                     print(listx)
                     return listx
                 else:#char5.vivement_Approuve=True
                     listx[5]=1
-                    print("Director appouve the cheque \n")
+                    print("\nDirector appouve the vivement")
                     print(listx)
                     return listx
 def generate_possibilities():
