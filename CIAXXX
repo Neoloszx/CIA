@@ -1,0 +1,128 @@
+import random
+import itertools
+import datetime
+
+class Client:
+    def __init__(self, name):
+        self.name = name
+        self.Connection_serveur_client = False
+        self.virement = False
+        self.depot_cheque = False
+        self.appel_tel = False
+        self.emprunt = False
+        self.Connection_serveur_admin = False
+        self.vivement_Approuve = False
+        self.Approuve_Pret = False
+        self.Connection_serveur_employee = False
+        self.Commit_cheque = False
+
+class Employee:
+    def __init__(self, name):
+        self.name = name
+        self.Connection_serveur_client = False
+        self.virement = False
+        self.depot_cheque = False
+        self.rdv_planing = False
+        self.appel_tel = False
+        self.emprunt = False
+        self.Connection_serveur_admin = False
+        self.vivement_Approuve = False
+        self.Approuve_Pret = False
+        self.Connection_serveur_employee = False
+        self.Commit_cheque = False
+
+class Admin:
+    def __init__(self, name):
+        self.name = name
+        self.Connection_serveur_client = False
+        self.virement = False
+        self.depot_cheque = False
+        self.rdv_planing = False
+        self.appel_tel = False
+        self.emprunt = False
+        self.Connection_serveur_admin = False
+        self.vivement_Approuve = False
+        self.Approuve_Pret = False
+        self.Connection_serveur_employee = False
+        self.Commit_cheque = False
+        self.server_start = False
+
+# Create Characters
+char1 = Client("Client1")
+char4 = Admin("IT Support")
+char5 = Employee("Directeur")
+
+def Eventgen():
+    listx = [0, 0, 0, 0, 0, 0, 0]
+    start_time = datetime.datetime(2023, 5, 17, 9, 0, 0)  # Start time
+    end_time = datetime.datetime(2023, 5, 17, 17, 0, 0)  # End time
+    random_time = start_time + datetime.timedelta(seconds=random.randint(0, int((end_time - start_time).total_seconds())))
+    print("Time:", random_time)
+
+    char4.Connection_serveur_admin = random.choice([True, False])
+    if not char4.Connection_serveur_admin:
+        print("Admin isn't here")
+        print("List:", listx)
+        return listx
+    else:
+        listx[0] = 1
+        print("Admin comes to work!")
+        print("List:", listx)
+
+        char4.server_start = random.choice([True, False])
+        if not char4.server_start:
+            print("\nAdmin didn't start the server")
+            print("List:", listx)
+            return listx
+        else:
+            listx[1] = 1
+            print("\nServer started by Admin. All operations are permitted")
+            print("List:", listx)
+
+        char1.Connection_serveur_client = random.choice([True, False])
+        if not char1.Connection_serveur_client:
+            print("\nClient isn't connected")
+            print("List:", listx)
+            return listx
+        else:
+            listx[2] = 1
+            print("\nClient is connected")
+            print("List:", listx)
+
+            char1.depot_cheque = random.choice([True, False])
+            if char1.depot_cheque:
+                listx[4] = 1
+                print("\nClient demanded deposit_cheque")
+                print("List:", listx)
+
+                char5.Commit_cheque = random.choice([True, False])
+                if not char5.Commit_cheque:
+                    listx[6] = 0
+                    print("\nDirector rejected the cheque")
+                    print("List:", listx)
+                else:
+                    listx[6] = 1
+                    print("\nDirector approved the cheque")
+                    print("List:", listx)
+
+            char1.virement = random.choice([True, False])
+            if char1.virement:
+                listx[3] = 1
+                print("\nClient demanded virement")
+                print("List:", listx)
+
+                char5.vivement_Approuve = random.choice([True, False])
+                if not char5.vivement_Approuve:
+                    listx[5] = 0
+                    print("\nDirector rejected the vivement")
+                    print("List:", listx)
+                    return listx
+                else:
+                    listx[5] = 1
+                    print("\nDirector approved the vivement")
+                    print("List:", listx)
+                    return listx
+
+if __name__ == '__main__':
+    print("[admin_connect, server_status, client_connect, demand_virement, depot_cheque, vivement_approuved, cheque_approuved]")
+    Eventgen()
