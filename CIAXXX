@@ -56,8 +56,9 @@ def Eventgen():
     listx = [0, 0, 0, 0, 0, 0, 0]
     start_time = datetime.datetime(2023, 1, 1, 9, 0, 0)  # Start time
     end_time = datetime.datetime(2023,12, 31, 17, 0, 0)  # End time
-    random_time = start_time + datetime.timedelta(seconds=random.randint(0, int((end_time - start_time).total_seconds())))
-    
+    current_time=datetime.datetime.now()
+    #random_time = start_time + datetime.timedelta(seconds=random.randint(0, int((end_time - start_time).total_seconds())))
+    random_time = current_time + datetime.timedelta(seconds=random.randint(0, int((end_time - start_time).total_seconds())))
     char4.Connection_serveur_admin = random.choice([True, False])
     if not char4.Connection_serveur_admin:
         print("Time:", random_time)
@@ -80,12 +81,13 @@ def Eventgen():
         print("Admin comes to work!")
         print("List:", listx)
         
-time_string=random_time.strftime("%d-%m-%Y %H:%M:%S")
-log_string=f"{log_tuple[0]},{log_tuple[1]},{log_tuple[2]}"
-f = open('logfile.txt','a')
-f.write('\n' + log_string)
-f.close()
+        time_string=random_time.strftime("%d-%m-%Y %H:%M:%S")
         log_tuple=random_time,"Admin comes to work!",listx
+        log_string=f"{log_tuple[0]},{log_tuple[1]},{log_tuple[2]}"
+        f = open('logfile.txt','a')
+        f.write('\n' + log_string)
+        f.close()
+        
 
         char4.server_start = random.choice([True, False])
         if not char4.server_start:
@@ -93,8 +95,13 @@ f.close()
             print("Time:", random_time)
             print("Admin didn't start the server")
             print("List:", listx)
-            #Create log string
+            time_string=random_time.strftime("%d-%m-%Y %H:%M:%S")
             log_tuple=random_time,"Admin didn't start the server",listx
+            log_string=f"{log_tuple[0]},{log_tuple[1]},{log_tuple[2]}"
+            f = open('logfile.txt','a')
+            f.write('\n' + log_string)
+            f.close()
+            
             
       
             return listx
@@ -104,7 +111,13 @@ f.close()
             print("Time:", random_time)
             print("Server started by Admin. All operations are permitted")
             print("List:", listx)
+            time_string=random_time.strftime("%d-%m-%Y %H:%M:%S")
             log_tuple=random_time,"Server started by Admin. All operations are permitted",listx
+            log_string=f"{log_tuple[0]},{log_tuple[1]},{log_tuple[2]}"
+            f = open('logfile.txt','a')
+            f.write('\n' + log_string)
+            f.close()
+            
 
         char1.Connection_serveur_client = random.choice([True, False])
         if not char1.Connection_serveur_client:
@@ -112,7 +125,13 @@ f.close()
             print("Time:", random_time)
             print("Client isn't connected")
             print("List:", listx)
+            time_string=random_time.strftime("%d-%m-%Y %H:%M:%S")
             log_tuple=random_time,"Client isn't connected",listx
+            log_string=f"{log_tuple[0]},{log_tuple[1]},{log_tuple[2]}"
+            f = open('logfile.txt','a')
+            f.write('\n' + log_string)
+            f.close()
+            
             return listx
         else:
             listx[2] = 1
@@ -120,7 +139,13 @@ f.close()
             print("Time:", random_time)
             print("Client is connected")
             print("List:", listx)
+            time_string=random_time.strftime("%d-%m-%Y %H:%M:%S")
             log_tuple=random_time,"Client is connected",listx
+            log_string=f"{log_tuple[0]},{log_tuple[1]},{log_tuple[2]}"
+            f = open('logfile.txt','a')
+            f.write('\n' + log_string)
+            f.close()
+            
 
             char1.depot_cheque = random.choice([True, False])
             if char1.depot_cheque:
@@ -129,7 +154,13 @@ f.close()
                 print("Time:", random_time)
                 print("Client demanded deposit_cheque")
                 print("List:", listx)
+                time_string=random_time.strftime("%d-%m-%Y %H:%M:%S")
                 log_tuple=random_time,"Client demanded deposit_cheque",listx
+                log_string=f"{log_tuple[0]},{log_tuple[1]},{log_tuple[2]}"
+                f = open('logfile.txt','a')
+                f.write('\n' + log_string)
+                f.close()
+                
 
                 char5.Commit_cheque = random.choice([True, False])
                 if not char5.Commit_cheque:
@@ -138,14 +169,26 @@ f.close()
                     print("Time:", random_time)
                     print("Director rejected the cheque")
                     print("List:", listx)
+                    time_string=random_time.strftime("%d-%m-%Y %H:%M:%S")
                     log_tuple=random_time,"Director rejected the cheque",listx
+                    log_string=f"{log_tuple[0]},{log_tuple[1]},{log_tuple[2]}"
+                    f = open('logfile.txt','a')
+                    f.write('\n' + log_string)
+                    f.close()
+                    
                 else:
                     listx[6] = 1
                     random_time += datetime.timedelta(seconds=random.randint(1, 999999))
                     print("Time:", random_time)
                     print("Director approved the cheque")
                     print("List:", listx)
+                    time_string=random_time.strftime("%d-%m-%Y %H:%M:%S")
                     log_tuple=random_time,"Director approved the cheque",listx
+                    log_string=f"{log_tuple[0]},{log_tuple[1]},{log_tuple[2]}"
+                    f = open('logfile.txt','a')
+                    f.write('\n' + log_string)
+                    f.close()
+                    
 
             char1.virement = random.choice([True, False])
             if char1.virement:
@@ -154,7 +197,13 @@ f.close()
                 print("Time:", random_time)
                 print("Client demanded virement")
                 print("List:", listx)
+                time_string=random_time.strftime("%d-%m-%Y %H:%M:%S")
                 log_tuple=random_time,"Client demanded virement",listx
+                log_string=f"{log_tuple[0]},{log_tuple[1]},{log_tuple[2]}"
+                f = open('logfile.txt','a')
+                f.write('\n' + log_string)
+                f.close()
+                
 
                 char5.vivement_Approuve = random.choice([True, False])
                 if not char5.vivement_Approuve:
@@ -163,7 +212,13 @@ f.close()
                     print("Time:", random_time)
                     print("Director rejected the vivement")
                     print("List:", listx)
+                    time_string=random_time.strftime("%d-%m-%Y %H:%M:%S")
                     log_tuple=random_time,"Director rejected the vivement",listx
+                    log_string=f"{log_tuple[0]},{log_tuple[1]},{log_tuple[2]}"
+                    f = open('logfile.txt','a')
+                    f.write('\n' + log_string)
+                    f.close()
+                    
                     return listx
                 else:
                     listx[5] = 1
@@ -171,7 +226,13 @@ f.close()
                     print("Time:", random_time)
                     print("Director approved the vivement")
                     print("List:", listx)
+                    time_string=random_time.strftime("%d-%m-%Y %H:%M:%S")
                     log_tuple=random_time,"Director approved the vivement",listx
+                    log_string=f"{log_tuple[0]},{log_tuple[1]},{log_tuple[2]}"
+                    f = open('logfile.txt','a')
+                    f.write('\n' + log_string)
+                    f.close()
+                    
                     return listx
 
 if __name__ == '__main__':
