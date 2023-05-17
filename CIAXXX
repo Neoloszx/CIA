@@ -57,8 +57,7 @@ def Eventgen():
     start_time = datetime.datetime(2023, 5, 17, 9, 0, 0)  # Start time
     end_time = datetime.datetime(2023, 5, 17, 17, 0, 0)  # End time
     random_time = start_time + datetime.timedelta(seconds=random.randint(0, int((end_time - start_time).total_seconds())))
-    print("Time:", random_time)
-
+    
     char4.Connection_serveur_admin = random.choice([True, False])
     if not char4.Connection_serveur_admin:
         print("Admin isn't here")
@@ -66,6 +65,8 @@ def Eventgen():
         return listx
     else:
         listx[0] = 1
+        random_time += datetime.timedelta(seconds=random.randint(1, 10))
+        print("Time:", random_time)
         print("Admin comes to work!")
         print("List:", listx)
 
@@ -76,6 +77,8 @@ def Eventgen():
             return listx
         else:
             listx[1] = 1
+            random_time += datetime.timedelta(seconds=random.randint(1, 10))
+            print("Time:", random_time)
             print("\nServer started by Admin. All operations are permitted")
             print("List:", listx)
 
@@ -86,39 +89,53 @@ def Eventgen():
             return listx
         else:
             listx[2] = 1
+            random_time += datetime.timedelta(seconds=random.randint(1, 10))
+            print("Time:", random_time)
             print("\nClient is connected")
             print("List:", listx)
 
             char1.depot_cheque = random.choice([True, False])
             if char1.depot_cheque:
                 listx[4] = 1
+                random_time += datetime.timedelta(seconds=random.randint(1, 10))
+                print("Time:", random_time)
                 print("\nClient demanded deposit_cheque")
                 print("List:", listx)
 
                 char5.Commit_cheque = random.choice([True, False])
                 if not char5.Commit_cheque:
                     listx[6] = 0
+                    random_time += datetime.timedelta(seconds=random.randint(1, 10))
+                    print("Time:", random_time)
                     print("\nDirector rejected the cheque")
                     print("List:", listx)
                 else:
                     listx[6] = 1
+                    random_time += datetime.timedelta(seconds=random.randint(1, 10))
+                    print("Time:", random_time)
                     print("\nDirector approved the cheque")
                     print("List:", listx)
 
             char1.virement = random.choice([True, False])
             if char1.virement:
                 listx[3] = 1
+                random_time += datetime.timedelta(seconds=random.randint(1, 10))
+                print("Time:", random_time)
                 print("\nClient demanded virement")
                 print("List:", listx)
 
                 char5.vivement_Approuve = random.choice([True, False])
                 if not char5.vivement_Approuve:
                     listx[5] = 0
+                    random_time += datetime.timedelta(seconds=random.randint(1, 10))
+                    print("Time:", random_time)
                     print("\nDirector rejected the vivement")
                     print("List:", listx)
                     return listx
                 else:
                     listx[5] = 1
+                    random_time += datetime.timedelta(seconds=random.randint(1, 10))
+                    print("Time:", random_time)
                     print("\nDirector approved the vivement")
                     print("List:", listx)
                     return listx
