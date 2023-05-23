@@ -3,13 +3,50 @@ import itertools
 import datetime
 
 class Client:
-    # Client class definition...
+    def __init__(self, name):
+        self.name = name
+        self.Connection_serveur_client = False
+        self.virement = False
+        self.depot_cheque= False
+        self.appel_tel = False
+        self.emprunt=False
+        self.Connection_serveur_admin=False
+        self.vivement_Approuve=False
+        self.Approuve_Pret=False
+        self.Connection_serveur_employee=False
+        self.Commit_cheque=False
 
 class Employee:
-    # Employee class definition...
+    def __init__(self, name):
+        self.name=name
+        self.Connection_serveur_client = False
+        self.virement = False
+        self.depot_cheque= False
+        self.rdv_planing = False
+        self.appel_tel = False
+        self.emprunt=False
+        self.Connection_serveur_admin=False
+        self.vivement_Approuve=False
+        self.Approuve_Pret=False
+        self.Connection_serveur_employee=False
+        self.Commit_cheque=False
 
 class Admin:
-    # Admin class definition...
+    def __init__(self, name):
+        self.name=name
+        self.Connection_serveur_client = False
+        self.virement = False
+        self.depot_cheque= False
+        self.rdv_planing = False
+        self.appel_tel = False
+        self.emprunt=False
+        self.Connection_serveur_admin=False
+        self.vivement_Approuve=False
+        self.Approuve_Pret=False
+        self.Connection_serveur_employee=False
+        self.Commit_cheque=False
+        self.server_start=False
+   
 
 def Eventgen(desired_result):
     choices = [True, False]
