@@ -2,14 +2,15 @@
 
 while true
 do
-    outcome=$(python3 GPTX.py)
-    echo "Outcome: $outcome"
+    python3 -c 'import os;while(1):os.system("python3 GPTX.py")'
+    outcome=$?
 
-    if [[ "$outcome" != "No path found." ]]
+    if [ $outcome != 0 ]
     then
         break
     fi
 done
+
 python3 -c 'import os;while(1):os.system("python3 GPTX.py")'
 
 import random
