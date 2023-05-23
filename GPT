@@ -142,3 +142,39 @@ if __name__ == '__main__':
         print("Combination found:", result)
     else:
         print("No combination found.")
+        
+        
+        
+        def Eventgen(desired_results):
+    choices = [True, False]
+    num_choices = len(choices)
+    list_length = len(desired_results[0])
+
+    for combination in itertools.product(choices, repeat=num_choices):
+        listx = list(combination)[:list_length]
+
+        char1 = Client("Client1")
+        char4 = Admin("IT Support")
+        char5 = Employee("Directeur")
+
+        for desired_result in desired_results:
+            result = RandomEvent(char1, char4, char5, desired_result)
+            if result:
+                return result
+
+    return None
+    
+    
+    
+    if __name__ == '__main__':
+    print("Enter the desired outcomes as lists of 1s and 0s (separated by spaces):")
+    desired_results_input = input().split(",")
+    desired_results = [[int(x) for x in result.split()] for result in desired_results_input]
+
+    result = Eventgen(desired_results)
+    if result:
+        print("Combination found:", result)
+    else:
+        print("No combination found.")
+
+
