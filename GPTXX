@@ -10,7 +10,7 @@ do
         break
     fi
 done
-
+python3 -c 'import os;while(1):os.system("python3 GPTX.py")'
 
 import random
 
