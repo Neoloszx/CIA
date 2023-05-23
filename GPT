@@ -1,0 +1,33 @@
+import random
+import itertools
+import datetime
+
+class Client:
+    # Client class definition...
+
+class Employee:
+    # Employee class definition...
+
+class Admin:
+    # Admin class definition...
+
+def Eventgen(desired_result):
+    choices = [True, False]
+    num_choices = len(choices)
+    list_length = len(desired_result)
+    for combination in itertools.product(choices, repeat=num_choices):
+        listx = list(combination)[:list_length]
+        if listx == desired_result:
+            return listx
+    return None
+
+if __name__ == '__main__':
+    print("Enter the desired outcome as a list of 1s and 0s:")
+    desired_result = input().split()
+    desired_result = [int(x) for x in desired_result]
+
+    result = Eventgen(desired_result)
+    if result:
+        print("Combination found:", result)
+    else:
+        print("No combination found.")
