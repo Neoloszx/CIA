@@ -2,14 +2,9 @@
 
 while true
 do
-    python3 -c 'import os;while(1):os.system("python3 GPTX.py")'
-    outcome=$?
-
-    if [ $outcome != 0 ]
-    then
-        break
-    fi
+    python3 your_script.py
 done
+
 
 python3 -c 'import os;while(1):os.system("python3 GPTX.py")'
 
