@@ -1,13 +1,16 @@
 #!/bin/bash
 
-outcome="No path found."
-
-while [[ "$outcome" == "No path found." ]]
+while true
 do
     outcome=$(python3 GPTX.py)
+    echo "Outcome: $outcome"
+
+    if [[ "$outcome" != "No path found." ]]
+    then
+        break
+    fi
 done
 
-echo "Outcome: $outcome"
 
 import random
 
