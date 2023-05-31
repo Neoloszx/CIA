@@ -1,0 +1,246 @@
+import random
+import itertools
+import datetime
+
+class Client:
+    def __init__(self, name):
+        self.name = name
+        self.Connection_serveur_client = False
+        self.virement = False
+        self.depot_cheque = False
+        self.appel_tel = False
+        self.emprunt = False
+        self.Connection_serveur_admin = False
+        self.vivement_Approuve = False
+        self.Approuve_Pret = False
+        self.Connection_serveur_employee = False
+        self.Commit_cheque = False
+
+class Employee:
+    def __init__(self, name):
+        self.name = name
+        self.Connection_serveur_client = False
+        self.virement = False
+        self.depot_cheque = False
+        self.rdv_planing = False
+        self.appel_tel = False
+        self.emprunt = False
+        self.Connection_serveur_admin = False
+        self.vivement_Approuve = False
+        self.Approuve_Pret = False
+        self.Connection_serveur_employee = False
+        self.Commit_cheque = False
+
+class Admin:
+    def __init__(self, name):
+        self.name = name
+        self.Connection_serveur_client = False
+        self.virement = False
+        self.depot_cheque = False
+        self.rdv_planing = False
+        self.appel_tel = False
+        self.emprunt = False
+        self.Connection_serveur_admin = False
+        self.vivement_Approuve = False
+        self.Approuve_Pret = False
+        self.Connection_serveur_employee = False
+        self.Commit_cheque = False
+        self.server_start = False
+
+# Create Characters
+char1 = Client("Client1")
+char4 = Admin("IT Support")
+char5 = Employee("Directeur")
+
+def Eventgen(randtime_parameter):
+    listx = [0, 0, 0, 0, 0, 0, 0]
+    #start_time = datetime.datetime(2023, 1, 1, 9, 0, 0)  # Start time
+    #end_time = datetime.datetime(2023,12, 31, 17, 0, 0)  # End time
+    #current_time=datetime.datetime.now()
+    #random_time = start_time + datetime.timedelta(seconds=random.randint(0, int((end_time - start_time).total_seconds())))
+    #random_time = current_time + datetime.timedelta(seconds=random.randint(0, int((end_time - start_time).total_seconds())))
+    random_time=randtime_parameter
+    char4.Connection_serveur_admin = random.choice([True, False])
+    if not char4.Connection_serveur_admin:
+        print("Time:", random_time)
+        print("Admin isn't here")
+        print("List:", listx)
+        
+        #Transform time to str :)
+        time_string=random_time.strftime("%d-%m-%Y %H:%M:%S")
+        #Create log string
+        log_tuple=time_string,"Admin isn't here",listx
+        log_string=f"{log_tuple[0]},{log_tuple[1]},{log_tuple[2]}"
+        #Send to log
+        f = open('logfile.txt','a')
+        f.write('\n' + log_string)
+        f.close()
+        return listx
+    else:
+        listx[0] = 1
+        print("Time:", random_time)
+        print("Admin comes to work!")
+        print("List:", listx)
+        
+        time_string=random_time.strftime("%d-%m-%Y %H:%M:%S")
+        log_tuple=random_time,"Admin comes to work!",listx
+        log_string=f"{log_tuple[0]},{log_tuple[1]},{log_tuple[2]}"
+        f = open('logfile.txt','a')
+        f.write('\n' + log_string)
+        f.close()
+        
+
+        char4.server_start = random.choice([True, False])
+        if not char4.server_start:
+            random_time += datetime.timedelta(seconds=random.randint(60, 3600))
+            print("Time:", random_time)
+            print("Admin didn't start the server")
+            print("List:", listx)
+            time_string=random_time.strftime("%d-%m-%Y %H:%M:%S")
+            log_tuple=random_time,"Admin didn't start the server",listx
+            log_string=f"{log_tuple[0]},{log_tuple[1]},{log_tuple[2]}"
+            f = open('logfile.txt','a')
+            f.write('\n' + log_string)
+            f.close()
+            
+            
+      
+            return listx
+        else:
+            listx[1] = 1
+            random_time += datetime.timedelta(seconds=random.randint(60, 3600))
+            print("Time:", random_time)
+            print("Server started by Admin. All operations are permitted")
+            print("List:", listx)
+            time_string=random_time.strftime("%d-%m-%Y %H:%M:%S")
+            log_tuple=random_time,"Server started by Admin. All operations are permitted",listx
+            log_string=f"{log_tuple[0]},{log_tuple[1]},{log_tuple[2]}"
+            f = open('logfile.txt','a')
+            f.write('\n' + log_string)
+            f.close()
+            
+
+        char1.Connection_serveur_client = random.choice([True, False])
+        if not char1.Connection_serveur_client:
+            random_time += datetime.timedelta(seconds=random.randint(60, 3600))
+            print("Time:", random_time)
+            print("Client isn't connected")
+            print("List:", listx)
+            time_string=random_time.strftime("%d-%m-%Y %H:%M:%S")
+            log_tuple=random_time,"Client isn't connected",listx
+            log_string=f"{log_tuple[0]},{log_tuple[1]},{log_tuple[2]}"
+            f = open('logfile.txt','a')
+            f.write('\n' + log_string)
+            f.close()
+            
+            return listx
+        else:
+            listx[2] = 1
+            random_time += datetime.timedelta(seconds=random.randint(60, 3600))
+            print("Time:", random_time)
+            print("Client is connected")
+            print("List:", listx)
+            time_string=random_time.strftime("%d-%m-%Y %H:%M:%S")
+            log_tuple=random_time,"Client is connected",listx
+            log_string=f"{log_tuple[0]},{log_tuple[1]},{log_tuple[2]}"
+            f = open('logfile.txt','a')
+            f.write('\n' + log_string)
+            f.close()
+            
+
+            char1.depot_cheque = random.choice([True, False])
+            if char1.depot_cheque:
+                listx[4] = 1
+                random_time += datetime.timedelta(seconds=random.randint(60, 3600))
+                print("Time:", random_time)
+                print("Client demanded deposit_cheque")
+                print("List:", listx)
+                time_string=random_time.strftime("%d-%m-%Y %H:%M:%S")
+                log_tuple=random_time,"Client demanded deposit_cheque",listx
+                log_string=f"{log_tuple[0]},{log_tuple[1]},{log_tuple[2]}"
+                f = open('logfile.txt','a')
+                f.write('\n' + log_string)
+                f.close()
+                
+
+                char5.Commit_cheque = random.choice([True, False])
+                if not char5.Commit_cheque:
+                    listx[6] = 0
+                    random_time += datetime.timedelta(seconds=random.randint(60, 3600))
+                    print("Time:", random_time)
+                    print("Director rejected the cheque")
+                    print("List:", listx)
+                    time_string=random_time.strftime("%d-%m-%Y %H:%M:%S")
+                    log_tuple=random_time,"Director rejected the cheque",listx
+                    log_string=f"{log_tuple[0]},{log_tuple[1]},{log_tuple[2]}"
+                    f = open('logfile.txt','a')
+                    f.write('\n' + log_string)
+                    f.close()
+                    
+                else:
+                    listx[6] = 1
+                    random_time += datetime.timedelta(seconds=random.randint(60, 3600))
+                    print("Time:", random_time)
+                    print("Director approved the cheque")
+                    print("List:", listx)
+                    time_string=random_time.strftime("%d-%m-%Y %H:%M:%S")
+                    log_tuple=random_time,"Director approved the cheque",listx
+                    log_string=f"{log_tuple[0]},{log_tuple[1]},{log_tuple[2]}"
+                    f = open('logfile.txt','a')
+                    f.write('\n' + log_string)
+                    f.close()
+                    
+
+            char1.virement = random.choice([True, False])
+            if char1.virement:
+                listx[3] = 1
+                random_time += datetime.timedelta(seconds=random.randint(60, 3600))
+                print("Time:", random_time)
+                print("Client demanded virement")
+                print("List:", listx)
+                time_string=random_time.strftime("%d-%m-%Y %H:%M:%S")
+                log_tuple=random_time,"Client demanded virement",listx
+                log_string=f"{log_tuple[0]},{log_tuple[1]},{log_tuple[2]}"
+                f = open('logfile.txt','a')
+                f.write('\n' + log_string)
+                f.close()
+                
+
+                char5.vivement_Approuve = random.choice([True, False])
+                if not char5.vivement_Approuve:
+                    listx[5] = 0
+                    random_time += datetime.timedelta(seconds=random.randint(60, 3600))
+                    print("Time:", random_time)
+                    print("Director rejected the vivement")
+                    print("List:", listx)
+                    time_string=random_time.strftime("%d-%m-%Y %H:%M:%S")
+                    log_tuple=random_time,"Director rejected the vivement",listx
+                    log_string=f"{log_tuple[0]},{log_tuple[1]},{log_tuple[2]}"
+                    f = open('logfile.txt','a')
+                    f.write('\n' + log_string)
+                    f.close()
+                    
+                    return listx
+                else:
+                    listx[5] = 1
+                    random_time += datetime.timedelta(seconds=random.randint(60, 3600))
+                    print("Time:", random_time)
+                    print("Director approved the vivement")
+                    print("List:", listx)
+                    time_string=random_time.strftime("%d-%m-%Y %H:%M:%S")
+                    log_tuple=random_time,"Director approved the vivement",listx
+                    log_string=f"{log_tuple[0]},{log_tuple[1]},{log_tuple[2]}"
+                    f = open('logfile.txt','a')
+                    f.write('\n' + log_string)
+                    f.close()
+                    
+                    return listx
+
+if __name__ == '__main__':
+    print("[admin_connect, server_status, client_connect, demand_virement, depot_cheque, vivement_approuved, cheque_approuved]")
+    #Eventgen()
+    
+    for i in range (100):
+	    current_time=datetime.datetime.now()
+	    random_timex= current_time+datetime.timedelta(hours=i*3)
+	    Eventgen(random_timex)
