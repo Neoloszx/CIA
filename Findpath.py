@@ -1,0 +1,130 @@
+#!/bin/bash
+
+import random
+
+class Client:
+    def __init__(self, name):
+        self.name = name
+        self.Connection_serveur_client = False
+        self.virement = False
+        self.depot_cheque= False
+        self.appel_tel = False
+        self.emprunt = False
+        self.Connection_serveur_admin = False
+        self.vivement_Approuve = False
+        self.Approuve_Pret = False
+        self.Connection_serveur_employee = False
+        self.Commit_cheque = False
+
+class Employee:
+    def __init__(self, name):
+        self.name = name
+        self.Connection_serveur_client = False
+        self.virement = False
+        self.depot_cheque = False
+        self.rdv_planing = False
+        self.appel_tel = False
+        self.emprunt = False
+        self.Connection_serveur_admin = False
+        self.vivement_Approuve = False
+        self.Approuve_Pret = False
+        self.Connection_serveur_employee = False
+        self.Commit_cheque = False
+
+class Admin:
+    def __init__(self, name):
+        self.name = name
+        self.Connection_serveur_client = False
+        self.virement = False
+        self.depot_cheque = False
+        self.rdv_planing = False
+        self.appel_tel = False
+        self.emprunt = False
+        self.Connection_serveur_admin = False
+        self.vivement_Approuve = False
+        self.Approuve_Pret = False
+        self.Connection_serveur_employee = False
+        self.Commit_cheque = False
+        self.server_start = False
+
+def RandomEvent(char1, char4, char5):
+    listx = [0,0,0,0,0,0,0]
+    char4.Connection_serveur_admin = random.choice([True, False])
+    if char4.Connection_serveur_admin != True:
+        return listx
+    else:
+        listx[0] = 1
+        char4.server_start = random.choice([True, False])
+        if char4.server_start != True:
+            return listx
+        else:
+            listx[1] = 1
+        char1.Connection_serveur_client = random.choice([True, False])
+        if char1.Connection_serveur_client != True:
+            return listx
+        else:
+            listx[2] = 1
+            char1.depot_cheque = random.choice([True, False])
+            if char1.depot_cheque != True:
+                pass
+            else:
+                listx[4] = 1
+                char5.Commit_cheque = random.choice([True, False])
+                if char5.Commit_cheque != True:
+                    listx[6] = 0
+                else:
+                    listx[6] = 1
+            char1.virement = random.choice([True, False])
+            if char1.virement != True:
+                return listx
+            else:
+                listx[3] = 1
+                char5.vivement_Approuve = random.choice([True, False])
+                if char5.vivement_Approuve != True:
+                    listx[5] = 0
+                    return listx
+                else:
+                    listx[5] = 1
+                    return listx
+
+def find_path(current_state, final_state, visited_states, actions):
+    if current_state == final_state:
+        return [current_state], actions
+
+    visited_states.append(current_state)
+
+    char1 = Client("Client1")
+    char4 = Admin("IT Support")
+    char5 = Employee("Directeur")
+
+    for i in range(len(current_state)):
+        if current_state[i] != final_state[i]:
+            new_state = list(current_state)
+            new_state[i] = final_state[i]
+            if new_state not in visited_states:
+                result = RandomEvent(char1, char4, char5)
+                if result == new_state:
+                    path, actions = find_path(new_state, final_state, visited_states, actions)
+                    if path is not None:
+                        return [current_state] + path, actions + [i]
+
+    return None, []
+
+def print_path(path, actions):
+    for i in range(len(path)-1):
+        print("Step", i+1, "->", path[i])
+        print("Action:", actions[i])
+        print()
+
+    print("Final State:", path[-1])
+
+if __name__ == '__main__':
+    initial_state = [0, 0, 0, 0, 0, 0, 0]
+    final_state = [1, 1, 1, 0, 1, 0, 0]
+
+    path, actions = find_path(initial_state, final_state, [], [])
+    if path:
+        print("Path found:")
+        print_path(path, actions)
+    else:
+        print("No path found.")
