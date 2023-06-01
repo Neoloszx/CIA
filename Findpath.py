@@ -1,5 +1,3 @@
-#!/bin/bash
-
 import random
 
 class Client:
@@ -122,9 +120,13 @@ if __name__ == '__main__':
     initial_state = [0, 0, 0, 0, 0, 0, 0]
     final_state = [1, 1, 1, 0, 1, 0, 0]
 
-    path, actions = find_path(initial_state, final_state, [], [])
-    if path:
-        print("Path found:")
-        print_path(path, actions)
-    else:
-        print("No path found.")
+    path = None
+    actions = []
+
+    while path is None:
+        path, actions = find_path(initial_state, final_state, [], [])
+        if path:
+            print("Path found:")
+            print_path(path, actions)
+        else:
+            print("No path found.")
