@@ -52,14 +52,11 @@ char1 = Client("Client1")
 char4 = Admin("IT Support")
 char5 = Employee("Directeur")
 
-def Eventgen(randtime_parameter):
+def Eventgen():
     listx = [0, 0, 0, 0, 0, 0, 0]
-    #start_time = datetime.datetime(2023, 1, 1, 9, 0, 0)  # Start time
-    #end_time = datetime.datetime(2023,12, 31, 17, 0, 0)  # End time
-    #current_time=datetime.datetime.now()
-    #random_time = start_time + datetime.timedelta(seconds=random.randint(0, int((end_time - start_time).total_seconds())))
-    #random_time = current_time + datetime.timedelta(seconds=random.randint(0, int((end_time - start_time).total_seconds())))
-    random_time=randtime_parameter
+    start_time = datetime.datetime(current_time.year, current_time.month, current_time.day, 9, 0, 0)  # Heure d'ouverture
+    end_time = datetime.datetime(current_time.year, current_time.month, current_time.day, 17, 0, 0)  # Heure de fermeture
+    random_time = start_time + datetime.timedelta(seconds=random.randrange(0, (end_time - start_time).total_seconds()))
     char4.Connection_serveur_admin = random.choice([True, False])
     if not char4.Connection_serveur_admin:
         print("Time:", random_time)
@@ -92,7 +89,8 @@ def Eventgen(randtime_parameter):
 
         char4.server_start = random.choice([True, False])
         if not char4.server_start:
-            random_time += datetime.timedelta(seconds=random.randint(60, 3600))
+            random_time += datetime.timedelta(seconds=random.randint(60, 1800))
+
             print("Time:", random_time)
             print("Admin didn't start the server")
             print("List:", listx)
@@ -108,7 +106,8 @@ def Eventgen(randtime_parameter):
             return listx
         else:
             listx[1] = 1
-            random_time += datetime.timedelta(seconds=random.randint(60, 3600))
+            random_time += datetime.timedelta(seconds=random.randint(60, 1800))
+
             print("Time:", random_time)
             print("Server started by Admin. All operations are permitted")
             print("List:", listx)
@@ -122,7 +121,8 @@ def Eventgen(randtime_parameter):
 
         char1.Connection_serveur_client = random.choice([True, False])
         if not char1.Connection_serveur_client:
-            random_time += datetime.timedelta(seconds=random.randint(60, 3600))
+            random_time += datetime.timedelta(seconds=random.randint(60, 1800))
+
             print("Time:", random_time)
             print("Client isn't connected")
             print("List:", listx)
@@ -136,7 +136,8 @@ def Eventgen(randtime_parameter):
             return listx
         else:
             listx[2] = 1
-            random_time += datetime.timedelta(seconds=random.randint(60, 3600))
+            random_time += datetime.timedelta(seconds=random.randint(60, 1800))
+
             print("Time:", random_time)
             print("Client is connected")
             print("List:", listx)
@@ -151,7 +152,8 @@ def Eventgen(randtime_parameter):
             char1.depot_cheque = random.choice([True, False])
             if char1.depot_cheque:
                 listx[4] = 1
-                random_time += datetime.timedelta(seconds=random.randint(60, 3600))
+                random_time += datetime.timedelta(seconds=random.randint(60, 1800))
+
                 print("Time:", random_time)
                 print("Client demanded deposit_cheque")
                 print("List:", listx)
@@ -166,7 +168,8 @@ def Eventgen(randtime_parameter):
                 char5.Commit_cheque = random.choice([True, False])
                 if not char5.Commit_cheque:
                     listx[6] = 0
-                    random_time += datetime.timedelta(seconds=random.randint(60, 3600))
+                    random_time += datetime.timedelta(seconds=random.randint(60, 1800))
+
                     print("Time:", random_time)
                     print("Director rejected the cheque")
                     print("List:", listx)
@@ -179,7 +182,8 @@ def Eventgen(randtime_parameter):
                     
                 else:
                     listx[6] = 1
-                    random_time += datetime.timedelta(seconds=random.randint(60, 3600))
+                    random_time += datetime.timedelta(seconds=random.randint(60, 1800))
+
                     print("Time:", random_time)
                     print("Director approved the cheque")
                     print("List:", listx)
@@ -194,7 +198,8 @@ def Eventgen(randtime_parameter):
             char1.virement = random.choice([True, False])
             if char1.virement:
                 listx[3] = 1
-                random_time += datetime.timedelta(seconds=random.randint(60, 3600))
+                random_time += datetime.timedelta(seconds=random.randint(60, 1800))
+
                 print("Time:", random_time)
                 print("Client demanded virement")
                 print("List:", listx)
@@ -209,7 +214,8 @@ def Eventgen(randtime_parameter):
                 char5.vivement_Approuve = random.choice([True, False])
                 if not char5.vivement_Approuve:
                     listx[5] = 0
-                    random_time += datetime.timedelta(seconds=random.randint(60, 3600))
+                    random_time += datetime.timedelta(seconds=random.randint(60, 1800))
+
                     print("Time:", random_time)
                     print("Director rejected the vivement")
                     print("List:", listx)
@@ -223,7 +229,8 @@ def Eventgen(randtime_parameter):
                     return listx
                 else:
                     listx[5] = 1
-                    random_time += datetime.timedelta(seconds=random.randint(60, 3600))
+                    random_time += datetime.timedelta(seconds=random.randint(60, 1800))
+
                     print("Time:", random_time)
                     print("Director approved the vivement")
                     print("List:", listx)
@@ -238,9 +245,7 @@ def Eventgen(randtime_parameter):
 
 if __name__ == '__main__':
     print("[admin_connect, server_status, client_connect, demand_virement, depot_cheque, vivement_approuved, cheque_approuved]")
-    #Eventgen()
     
-    for i in range (100):
-	    current_time=datetime.datetime.now()
-	    random_timex= current_time+datetime.timedelta(hours=i*3)
-	    Eventgen(random_timex)
+    for i in range(100):
+        current_time = datetime.datetime.now()
+        Eventgen()
